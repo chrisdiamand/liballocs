@@ -144,6 +144,10 @@ int __liballocs_iterate_types(void *typelib_handle, int (*cb)(struct uniqtype *t
 	struct link_map *h = typelib_handle;
 	unsigned char *load_addr = (unsigned char *) h->l_addr;
 	
+	// HACK: Ignore the VDSO.
+	if (!strcmp(h->l_name, "linux-vdso.so.1"))
+	    return 0;
+
 	/* If load address is greater than STACK_BEGIN, it's suspicious -- 
 	 * perhaps a vdso-like thing. Skip it. The vdso itself is detected
 	 * below (it lives in user memory, but points into kernel memory). */
