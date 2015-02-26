@@ -130,7 +130,13 @@ int __liballocs_iterate_types(void *typelib_handle, int (*cb)(struct uniqtype *t
 	/* Don't use dladdr() to iterate -- too slow! Instead, iterate 
 	 * directly over the dynsym section. */
 	unsigned char *load_addr = (unsigned char *) ((struct link_map *) typelib_handle)->l_addr;
-	
+
+	// HACK: Ignore the VDSO.
+	if (!strcmp(((struct link_map *) typelib_handle)->l_name, "linux-vdso.so.1"))
+	{
+	    return 0;
+	}
+
 	/* If load address is greater than STACK_BEGIN, it means it's the vdso --
 	 * skip it, because it doesn't contain any uniqtypes and we may fault
 	 * trying to read its dynsym. */
