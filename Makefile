@@ -28,5 +28,5 @@ clean:
 	$(MAKE) -C tests clean
 
 .PHONY: tests
-tests:
+tests: lib
 	$(MAKE) -C tests

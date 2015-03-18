@@ -10,7 +10,7 @@ CPP_SRC := $(wildcard *.cpp)
 default: liballocstool.a dumptypes allocsites usedtypes ifacetypes find-allocated-type-size lang
 
 .PHONY: lang
-lang:
+lang: liballocstool.a
 	for dir in $(wildcard lang/*); do if [ -e $$dir/Makefile ]; then $(MAKE) -C $$dir; fi; done
 
 .PHONY: clean
