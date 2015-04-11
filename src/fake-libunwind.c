@@ -109,8 +109,7 @@ int unw_step(unw_cursor_t *cp)
 	};
 		
 	// sanity check the results
-	if (new_ctxt.frame_sp >= BEGINNING_OF_STACK
-	||  new_ctxt.frame_sp <= (BEGINNING_OF_STACK - 0x100000000))
+	if (new_ctxt.frame_sp >= BEGINNING_OF_STACK)
 	{
 		// looks dodgy -- say we failed
 		return -1;
