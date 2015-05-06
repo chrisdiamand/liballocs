@@ -11,6 +11,11 @@ test -n "$cu_compdir" || (echo "args: <sourcepath> <obj> <cu_fname> <cu_compdir>
 
 cu_allocspath="$( echo "$cu_sourcepath" | grep '\.cil\.c$' | sed 's/\.cil\.c/.i.allocs/' )"
 
+# If we're using CIL with clang backend, the source path might be '%.cil.i'.
+if [[ -z "$cu_allocspath" ]]; then
+    cu_allocspath="$( echo "$cu_sourcepath" | grep '\.cil\.i$' | sed 's/\.cil\.i/.i.allocs/' )"
+fi
+
 # If we're using clang instead of CIL then the source path will just be '%.c',
 # not '%.cil.c'.
 if [[ -z "$cu_allocspath" ]]; then

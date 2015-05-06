@@ -76,7 +76,8 @@ class AllocsCC(AllocsCompilerWrapper):
            "--dodumpallocs", \
             "--keepunused"] \
             + includeArgs + \
-            ["-Wno-unused-variable", "-Wno-unused-label"]
+            ["-Wno-unused-variable", "-Wno-unused-label"] \
+            + ["-g", "-fno-eliminate-unused-debug-types"]
             # We need the above -Wno-unused-... because CIL creates
             # some unused stuff (unavoidably, I believe) which will
             # make compilation done with -Werror barf if we don't

@@ -87,8 +87,7 @@ class AllocsCompilerWrapper(CompilerWrapper):
         return self.getLinkPath()
     
     def getCustomCompileArgs(self, sourceInputFiles):
-        return ["-gdwarf-4", "-gstrict-dwarf", "-fvar-tracking-assignments", \
-        "-fno-omit-frame-pointer", "-ffunction-sections"]
+        return ["-gdwarf-4", "-fno-omit-frame-pointer", "-ffunction-sections"]
 
     def main(self):
         # un-export CC from the env if it's set to allocscc, because 
